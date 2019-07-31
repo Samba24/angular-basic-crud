@@ -8,26 +8,31 @@ import { RandomService } from './services/random.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular-basic-crud';
-  randoms = [
-    {
-      id : 1,
-      description : 'This is a random'
-    }
-  ]
+  randoms : Array<Random>
 
   constructor(private randomService : RandomService){}
 
   addRandom(){
     let description = prompt('Enter random description');
     let random = new Random(description);
-    this.randomService.add(random).then((result)=>{
-      if(result){
-  
+    this.randomService.add(random).then((result : any)=>{
+      if(result.state){
+        random.setId = result.state;
+        this.randoms.push(random)
+      }else{
+        alert('Unable to create random')
       }
     })
     
   }
+
   ngOnInit(): void {
+    this.getRandoms();
+  }
+
+  getRandoms(){
+    this.randomService.getAll().subscribe((data : any) => {
+      this.randoms = data
+    })
   }
 }

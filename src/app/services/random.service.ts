@@ -23,7 +23,7 @@ export class RandomService{
     return this.httpClient.post(`${environment.apiUrl}/random/remove`,random).toPromise();
   }
 
-  getAll(random : Random){
-    return this.httpClient.get(`${environment.apiUrl}/random/get`).toPromise();
+  getAll(){
+    return this.httpClient.get(`${environment.apiUrl}/randoms`);
   }
 }

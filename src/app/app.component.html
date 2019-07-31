@@ -26,7 +26,8 @@
     <button class="btn btn-success btn-sm btn-flat mb-3" (click)="addRandom()">Add a random</button>
     <span class="d-block">List of randoms</span>
     <ul *ngFor="let random of randoms" class="mt-2">
-        <li>{{random.description}}</li>
+        <li class="d-inline">{{random.description}}</li> <a href="#">Edit</a>
+
     </ul>
 </div>
 <router-outlet></router-outlet>
