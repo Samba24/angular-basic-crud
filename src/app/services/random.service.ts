@@ -16,11 +16,11 @@ export class RandomService{
   }
 
   edit(random : Random){
-    return this.httpClient.post(`${environment.apiUrl}/random/edit`,random).toPromise();
+    return this.httpClient.post(`${environment.apiUrl}/random/update/${random.id}`,random).toPromise();
   }
 
   remove(random : Random){
-    return this.httpClient.post(`${environment.apiUrl}/random/remove`,random).toPromise();
+    return this.httpClient.delete(`${environment.apiUrl}/random/delete/${random.id}`).toPromise();
   }
 
   getAll(){

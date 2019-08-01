@@ -17,7 +17,7 @@ export class AppComponent {
     let random = new Random(description);
     this.randomService.add(random).then((result : any)=>{
       if(result.state){
-        random.setId = result.state;
+        random.id = result.state;
         this.randoms.push(random)
       }else{
         alert('Unable to create random')
@@ -33,6 +33,28 @@ export class AppComponent {
   getRandoms(){
     this.randomService.getAll().subscribe((data : any) => {
       this.randoms = data
+    })
+  }
+
+  editRandom(random : Random){
+    let description = prompt('Enter new random description',random.description);
+    if(description){
+      random.description = description;
+      this.randomService.edit(random).then((result : any)=>{
+        if(!result.state){
+          alert('Unable to update the random')
+        }
+      })
+    }
+  }
+
+  deleteRandom(random : Random,index){
+    this.randomService.remove(random).then((result : any)=>{
+      if(result.state){
+        this.randoms.splice(index,1);
+      }else{
+        alert('Unable to delete the random')
+      }
     })
   }
 }
